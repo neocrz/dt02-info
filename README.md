@@ -1,6 +1,6 @@
 # DT02-info
 
-This repository contains a basic Love2D project designed to assist players of the game DT02. It provides functionalities for managing your Digimon boxes, calculating NP, and adding information about items, Digimon, and their evolution paths.
+This repository contains a basic Love2D project designed to assist players of the game [DT02](https://dragonrod342.itch.io/digital-tamers-2). It provides functionalities for managing your Digimon boxes, calculating NP, and adding information about items, Digimon, and their evolution paths.
 
 ## `lib.ext`
 -  [classic](https://github.com/rxi/classic)
