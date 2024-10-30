@@ -1,9 +1,9 @@
 # DT02-info
 
-This repository contains a basic Love2D project designed to assist players of the game Digital Tamers 02. It provides functionalities for managing your Digimon boxes, calculating NP, and includes data on items, Digimon, and their evolution paths.
+This repository contains a basic Love2D project designed to assist players of the game Digital Tamers 02. It provides functionalities for managing your Digimon boxes, calculating NP, and adding information about items, Digimon, and their evolution paths.
 
 ## To-Do
-- [ ] DigiData (DD)
+- [ ] DigiData
     - [ ] Digimon
         - status: basic
         - [x] Add 
@@ -18,6 +18,12 @@ This repository contains a basic Love2D project designed to assist players of th
         - [ ] Remove
         - [x] Get
         - [ ] Update
+    - [ ] Items
+- [ ] PlayerData (PD)
+    - [ ] Digi Boxes
+        - [ ] Digimon
+            - [ ] NP calc
+    - [ ] Inventory
 
 ## Structure
 - `lib.digi_data` (DD in `globals.lua`)
