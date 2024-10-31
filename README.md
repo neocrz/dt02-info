@@ -9,10 +9,10 @@ This repository contains a basic Love2D project designed to assist players of th
 - [ser](https://github.com/gvx/Ser)
 
 ## To-Do
-- [ ] DigiData
+- [ ] DigiData `DD`
     - [ ] Digimon
         - status: basic
-        - [ ] Add
+        - [x] Add
         - [ ] Get 
         - [ ] Remove 
         - [ ] Update
@@ -22,7 +22,7 @@ This repository contains a basic Love2D project designed to assist players of th
         - [ ] Remove 
         - [ ] Update
     - [ ] Items
-- [ ] PlayerData (PD)
+- [ ] PlayerData `PD`
     - [x] Digimon (on box, line, row)
         - [x] Add
         - [x] Get 
@@ -38,9 +38,9 @@ This repository contains a basic Love2D project designed to assist players of th
     - Attempts to load `digi_data.lua` on each startup.
     - `DD:save()` saves the file `digi_data.lua`.
     - Digimon
-        - `DD:addDigi(digi_table)`
-            - Adds a Digimon using data from `digi_table`.
-            - Missing data will be filled in using data present in `DD.base_digi`.
+        - `DD:addDigi(digi)`
+            - Adds a Digimon using data from `digi`.
+            - Missing data will be filled in using data present in `DD.base.digi`.
             - Returns the ID of the Digimon.
         - `DD:rmDigi(digi_id)`
             - Removes the Digimon from both `DD.digis` and its relationships in Digivolutions (`DD.dv`).

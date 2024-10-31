@@ -77,7 +77,7 @@ function _:save()
     return love.filesystem.write(self.savefile, t)
   end
 
-  file = io.open(self.savefile, "w")
+  file = io.open("save/"..self.savefile, "w")
   file:write(t)
   file:close()
 end
@@ -88,7 +88,7 @@ function _:load()
   end
 
   local loadfile = loadfile or load -- for compatibility with different Lua versions
-  local digi_data_loader = loadfile(self.savefile)
+  local digi_data_loader = loadfile("save/"..self.savefile)
 
   if digi_data_loader then
     return digi_data_loader

@@ -81,10 +81,11 @@ function _:addDigi(digi)
   -- init digi
   self.digis[digi_id] = {}
   for k, v in pairs(self.base.digi) do
-    self.digis[digi_id][k] = digi.k or self.base.digi[k]
+    self.digis[digi_id][k] = digi[k] or self.base.digi[k]
   end
   
   self:save()
+  return digi_id
 end
 
 function _:save()
@@ -99,7 +100,7 @@ function _:save()
     return love.filesystem.write(self.savefile, t)
   end
 
-  file = io.open(self.savefile, "w")
+  file = io.open("save/"..self.savefile, "w")
   file:write(t)
   file:close()
 end
@@ -110,7 +111,7 @@ function _:load()
   end
 
   local loadfile = loadfile or load   -- for compatibility with different Lua versions
-  local loaded = loadfile(self.savefile)
+  local loaded = loadfile("save/"..self.savefile)
 
   if loaded then
     return loaded
