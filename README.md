@@ -10,17 +10,17 @@ This repository contains a basic Love2D project designed to assist players of th
 
 ## To-Do
 - [ ] DigiData
-    - [x] Digimon
+    - [ ] Digimon
         - status: basic
-        - [x] Add
-        - [x] Get 
-        - [x] Remove 
-        - [x] Update
-    - [x] Digivolution
-        - [x] Add
-        - [x] Get 
-        - [x] Remove 
-        - [x] Update
+        - [ ] Add
+        - [ ] Get 
+        - [ ] Remove 
+        - [ ] Update
+    - [ ] Digivolution
+        - [ ] Add
+        - [ ] Get 
+        - [ ] Remove 
+        - [ ] Update
     - [ ] Items
 - [ ] PlayerData (PD)
     - [x] Digimon (on box, line, row)
@@ -31,7 +31,7 @@ This repository contains a basic Love2D project designed to assist players of th
     - [ ] Inventory
 
 ## Structure
-- `lib.digi_data` (DD in `globals.lua`)
+- `lib.dd` digi data
     - Dependencies: `lib.ext.classic`
     - Contains information such as items, stages, base stats of Digimon, and evolution paths along with conditions.
     - Automatically saves a backup in the Love2D save folder (or in the current directory if running in the Lua interpreter) in the file `digi_data.lua`.
@@ -65,4 +65,4 @@ This repository contains a basic Love2D project designed to assist players of th
                 - digi_table -> `digi_id, level, hp, attack, sp_attack, defense, sp_defense`
             - `PD:updDigi(box,line,row, digi_table)`
             - `PD:rmDigi(box,line,row)`
-        - 
+- `lib.pd` player data.

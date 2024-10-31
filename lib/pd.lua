@@ -98,7 +98,7 @@ function _:load()
 end
 
 function _:addDigi(box, line, row, digi_table)
-  local f_info = debug.getinfo(1, "n")
+  local f_info = debug.getinfo(1, "n") -- get function info
   local valid, msg = self:checkIndex(box,line,row,"PD:"..f_info.name)
 
   if not valid then
