@@ -1,27 +1,19 @@
 {
-  description = "A Nix-flake-based lua development environment";
+  description = "A Nix-flake-based Python development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
   outputs = { self, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; overlays = [ self.overlays.default ]; };
+        pkgs = import nixpkgs { inherit system; };
       });
     in
     {
-      overlays.default = final: prev: rec {
-        # rEnv = final.rWrapper.override {
-        #   packages = with final.rPackages; [ knitr ];
-        # };
-      };
-
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs;[
-            lua5_1 love
-          ];
+          packages = with pkgs; [ lua5_1 love ];
         };
       });
     };

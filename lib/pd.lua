@@ -2,21 +2,21 @@ local _ = require("lib.ext.classic"):extend()
 local Serialize = require("lib.ext.ser")
 function _:checkIndex(box, line, row, msg)
   local msg = msg or ""
-  if (type(box) ~= "number" ) or
-  (type(line) ~= "number" ) or
-  (type(row) ~= "number" )
+  if (type(box) ~= "number") or
+      (type(line) ~= "number") or
+      (type(row) ~= "number")
   then
-    msg = msg.." box,line,row are not valid numbers"
-    print(msg)
+    msg = msg .. " box,line,row are not valid numbers"
+    if self.debug then print(msg) end
     return false, msg
   end
-  if 
-    ((box<1) or (box>self.sizes.box)) or
-    ((line<1) or (line>self.sizes.line)) or
-    ((row<1) or (row>self.sizes.row))
+  if
+      ((box < 1) or (box > self.sizes.box)) or
+      ((line < 1) or (line > self.sizes.line)) or
+      ((row < 1) or (row > self.sizes.row))
   then
-    msg = msg.." box,line,row are not valid indexes"
-    print(msg)
+    msg = msg .. " box,line,row are not valid indexes"
+    if self.debug then print(msg) end
     return false, msg
   end
   return true, "Valid indexes"
@@ -25,18 +25,18 @@ end
 function _:genBoxes()
   self.boxes = {}
   for i = 1, self.sizes.box do
-    self.boxes[i]={}
+    self.boxes[i] = {}
     for j = 1, self.sizes.line do
-      self.boxes[i][j]={}
+      self.boxes[i][j] = {}
       for k = 1, self.sizes.row do
-        self.boxes[i][j][k]={
-          digi_id=-01,
-          level=0,
-          hp=0,
-          attack=0,
-          defense=0,
-          sp_attack=0,
-          sp_defense=0,
+        self.boxes[i][j][k] = {
+          digi_id = -01,
+          level = 0,
+          hp = 0,
+          attack = 0,
+          defense = 0,
+          sp_attack = 0,
+          sp_defense = 0,
         }
       end
     end
@@ -45,14 +45,17 @@ function _:genBoxes()
   self:save()
   return true
 end
+
 _.cleanBoxes = _.genBoxes
 
-function _:new()
+function _:new(_t)
+  local t = _t or {}
+  if t.debug then self.debug = true end
   self.savefile = "player_data.lua"
   self.sizes = {
-    box=12,
-    line=6,
-    row=10,
+    box = 12,
+    line = 6,
+    row = 10,
   }
   local t = self:load()
   if t then
@@ -66,7 +69,6 @@ function _:new()
   self:save()
 end
 
-
 function _:save()
   local t = {}
   t.boxes = self.boxes
@@ -77,7 +79,7 @@ function _:save()
     return love.filesystem.write(self.savefile, t)
   end
 
-  file = io.open("save/"..self.savefile, "w")
+  file = io.open("save/" .. self.savefile, "w")
   file:write(t)
   file:close()
 end
@@ -88,7 +90,7 @@ function _:load()
   end
 
   local loadfile = loadfile or load -- for compatibility with different Lua versions
-  local digi_data_loader = loadfile("save/"..self.savefile)
+  local digi_data_loader = loadfile("save/" .. self.savefile)
 
   if digi_data_loader then
     return digi_data_loader
@@ -99,7 +101,7 @@ end
 
 function _:addDigi(box, line, row, digi_table)
   local f_info = debug.getinfo(1, "n") -- get function info
-  local valid, msg = self:checkIndex(box,line,row,"PD:"..f_info.name)
+  local valid, msg = self:checkIndex(box, line, row, "PD:" .. f_info.name)
 
   if not valid then
     return false, msg
@@ -107,12 +109,13 @@ function _:addDigi(box, line, row, digi_table)
 
   if type(digi_table) ~= "table" then
     local msg = "PD:addDigi digi_table must be a table."
+    if self.debug then print(msg) end
     return false, msg
   end
 
   local d = digi_table or {}
 
-  for k,v in pairs(self.boxes[box][line][row]) do
+  for k, v in pairs(self.boxes[box][line][row]) do
     self.boxes[box][line][row][k] = d[k] or self.boxes[box][line][row][k]
   end
   self:save()
@@ -121,9 +124,9 @@ end
 
 _.updDigi = _.addDigi
 
-function _:rmDigi(box,line,row)
+function _:rmDigi(box, line, row)
   local f_info = debug.getinfo(1, "n")
-  local valid, msg = self:checkIndex(box,line,row,"PD:"..f_info.name)
+  local valid, msg = self:checkIndex(box, line, row, "PD:" .. f_info.name)
 
   if not valid then
     return false, msg
@@ -134,9 +137,9 @@ function _:rmDigi(box,line,row)
   return true
 end
 
-function _:getDigi(box,line,row)
+function _:getDigi(box, line, row)
   local f_info = debug.getinfo(1, "n")
-  local valid, msg = self:checkIndex(box,line,row,"PD:"..f_info.name)
+  local valid, msg = self:checkIndex(box, line, row, "PD:" .. f_info.name)
 
   if not valid then
     return false, msg
