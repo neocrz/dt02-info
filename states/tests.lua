@@ -3,22 +3,20 @@ local State = {}
 local ObjHandler = ObjectHandler()
 
 function State:enter()
-  local test = Gui.base.Rect{
-    x=10, y=10, w=20, h=20
-  }
-
-  local txt = Gui.base.Text{
-    x=10, y=40, w=20, h=20,
-    text="txt"
-  }
-
   local btn = Gui.button.Rect{
-    x=10, y=70, w=20, h=20,
     text="btn"
   }
-  local a = ObjHandler:addObj(test)
-  local b = ObjHandler:addObj(txt)
-  local c = ObjHandler:addObj(btn)
+  local btn2 = Gui.button.Rect{
+    text="btn2"
+  }
+
+  local box = Gui.box{
+    x = 30, y=100, w=300, h=500
+  }
+
+  box:addObj(btn)
+  box:addObj(btn2)
+  ObjHandler:addObj(box)
 end
 
 function State:update(dt)
@@ -53,8 +51,8 @@ function State:mousemoved(x, y, dx, dy, istouch)
   ObjHandler:mousemoved(x, y, dx, dy, istouch)
 end
 
-function State:mousepressed(x, y, button, istouch, presses)
-  ObjHandler:mousepressed(x, y, button, istouch, presses)
+function State:mousepressed(...)
+  ObjHandler:mousepressed(...)
 end
 
 function State:textinput(t)

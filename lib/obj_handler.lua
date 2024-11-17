@@ -30,9 +30,8 @@ function OH:clearLayer(n)
   end
 end
 
-function OH:addObj(obj, layer)
-  local layer = layer or self.default_layer
-  
+function OH:addObj(obj, _layer)
+  local layer = _layer or self.default_layer
   if not self.layers[layer] then
     self:addLayer(layer)
   end
@@ -43,21 +42,19 @@ end
 
 function OH:rmObj(obj)
   local layer = obj._OH_layer or self.default_layer
-  
   if self.layers[layer] then
     self.layers[layer]["objs"][obj] = nil
     self.layers[layer].count = self.layers[layer].count - 1
   end
-  
   obj._OH_layer = nil
   return true
 end
 
-function OH:mvObj(obj, newLayer)
+function OH:mvObj(obj, _newLayer)
   if not self:objExist(obj) then
     return false
   end
-  local newLayer = newLayer or self.default_layer
+  local newLayer = _newLayer or self.default_layer
   self:rmObj(obj)
   self:addObj(obj,newLayer)
 end
@@ -71,91 +68,90 @@ function OH:objExist(obj)
 end
 
 function OH:update(dt)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
       if obj.update then obj:update(dt) end
     end
   end
 end
 
 function OH:draw()
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
       if obj.draw then obj:draw() end
     end
   end
 end
 
-function OH:touchmoved(id, x, y, dx, dy, pressure)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.touchmoved then obj:touchmoved(id, x, y, dx, dy, pressure) end
+function OH:touchmoved(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:touchmoved(...)
     end
   end
 end
 
-function OH:touchpressed(id, x, y, dx, dy, pressure)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.touchpressed then obj:touchpressed(id, x, y, dx, dy, pressure) end
+function OH:touchpressed(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:touchpressed(...)
     end
   end
 end
 
-function OH:touchreleased(id, x, y, dx, dy, pressure)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.touchreleased then obj:touchreleased(id, x, y, dx, dy, pressure) end
+function OH:touchreleased(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:touchreleased(...)
     end
   end
 end
 
-function OH:mousereleased(x, y, button, istouch, presses)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.mousereleased then obj:mousereleased(x, y, button, istouch, presses) end
+function OH:mousereleased(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:mousereleased(...)
     end
   end
 end
 
-function OH:mousemoved(x, y, dx, dy, istouch)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.mousemoved then obj:mousemoved(x, y, dx, dy, istouch) end
+function OH:mousemoved(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:mousemoved(...)
     end
   end
 end
 
-function OH:mousepressed( x, y, button, istouch, presses )
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.mousepressed then obj:mousepressed( x, y, button, istouch, presses ) end
+function OH:mousepressed(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:mousepressed(...)
     end
   end
 end
-function OH:textinput(t)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.textinput then obj:textinput(t) end
-    end
-  end
-end
-
-function OH:keypressed(key)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.keypressed then obj:keypressed(key) end
-    end
-  end
-end
-function OH:wheelmoved(x,y)
-  for k_l, layer in pairs(self.layers) do
-    for k_o, obj in pairs(layer.objs) do
-      if obj.wheelmoved then obj:wheelmoved(x,y) end
+function OH:textinput(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:textinput(...)
     end
   end
 end
 
+function OH:keypressed(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:keypressed(...)
+    end
+  end
+end
+function OH:wheelmoved(...)
+  for _, layer in pairs(self.layers) do
+    for _, obj in pairs(layer.objs) do
+      obj:wheelmoved(...)
+    end
+  end
+end
 
 
 return OH

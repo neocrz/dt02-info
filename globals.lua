@@ -1,4 +1,26 @@
-Classic = require "lib.ext.classic"
+
+local _classic = require "lib.ext.classic"
+
+Classic = _classic:extend()
+
+-- I have this with the purpose that if some callback is not being
+-- used by a object it ref. to this table that in reality
+-- is a empty function
+local _empty_function = setmetatable({}, {
+  __call = function(_, ...) end,
+})
+
+local _callbacks = {
+  "new", "draw", "update",
+  "touchreleased", "touchmoved", "touchpressed",
+  "mousefocus", "mousemoved", "mousepressed", "mousereleased",
+  "keypressed", "keyreleased", "textinput", "wheelmoved",
+}
+
+for _, cb in pairs(_callbacks) do
+  Classic[cb] = _empty_function
+end
+
 Serialize = require "lib.ext.ser"
 
 require "lib.utils"

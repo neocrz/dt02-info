@@ -1,8 +1,8 @@
-local loadTimeStart = love.timer.getTime()
+love = love ---@diagnostic disable-line
 require "globals"
 require "states"
 
-function setWindow()
+local function setWindow()
   if CONF.mobile then
     local _w, _h = love.window.getDesktopDimensions()
     local _s = love.window.getDPIScale()

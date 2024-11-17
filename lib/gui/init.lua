@@ -1,13 +1,13 @@
 local path = (...):match("(.-)[^%.]+$")
 local cwd  = (...):gsub('%.init$', '') .. "."
-local _    = {}
+local Gui    = {}
 
 
 
-local mod = {"base","col", "button"}
+local mod = {"base","box","col","button"}
 
-for k,v in pairs(mod) do
-  _[v] = require(cwd..v)
+for _,v in pairs(mod) do
+  Gui[v] = require(cwd..v)
 end
 
-return _
+return Gui

@@ -1,5 +1,17 @@
+--[[
+--  Name: pd.lua
+--  Purpose: Player Data - A module to manage player content for DT02.
+--  - digimon and digimon boxes.
+--]]
+
+-- the returned module
+
 local _ = require("lib.ext.classic"):extend()
+-- To load already existent boxes table
 local Serialize = require("lib.ext.ser")
+
+--- check the indexes of a lua box.
+-- This function checks if the inputs are valid numbers and comply with the box limitations.
 function _:checkIndex(box, line, row, msg)
   local msg = msg or ""
   if (type(box) ~= "number") or
