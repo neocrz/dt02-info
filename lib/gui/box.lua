@@ -15,8 +15,6 @@ function Box:new(_t)
   self.objs.count = 0
   self.objs.ref = {x=0,y=0}
   self.objs.objs = {}
-  self.objs.padding = self.objs.padding or {}
-  self.objs.padding.h = self.objs.padding.h or 10
   self.mousewheelsen = t.mousewheelsen or 4
   self._hasbeenpressed = false
 end
@@ -34,8 +32,10 @@ function Box:addObj(obj)
   obj.x = self.x
   obj.w = self.objs.w
   obj.h = self.objs.h
+
   obj._base_y = (self.objs.h * self.objs.count)
   self.objs.objs[obj]=obj
+
   self.objs.count = self.objs.count + 1
   return true
 end
