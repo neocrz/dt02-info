@@ -8,7 +8,7 @@ function Box:new(_t)
   local t = _t or {}
   Box.super.new(self, t)
   self.mode = "line"
-  self.col_type = "Rect"
+  self.col_type = "rect"
   self.objs = t.objs or {}
   self.objs.w = self.w
   self.objs.h = self.objs.h or 30

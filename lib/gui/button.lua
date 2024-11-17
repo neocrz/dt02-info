@@ -1,13 +1,13 @@
-local path             = (...):match("(.-)[^%.]+$")
-local _                = {}
+local path = (...):match("(.-)[^%.]+$")
+local _ = {}
 
-local col              = require(path .. "col")
-local base             = require(path .. "base")
+local col = require(path .. "col")
+local base = require(path .. "base")
 
-local _t               = {}
+local _t = {}
 _t.r, _t.g, _t.b, _t.a = love.graphics.getColor()
 
-local dflt             = {
+local dflt = {
   color = { 1, 1, 1, 1 },
   ext_color = { _t.r, _t.g, _t.b, _t.a },
   font = love.graphics.getFont(),
@@ -50,10 +50,10 @@ function _.Button:draw()
   if self._draw then self:_draw() end
 end
 
-_.Rect = _.Button:extend()
-function _.Rect:new(t)
+_.rect = _.Button:extend()
+function _.rect:new(t)
   local t = t or {}
-  _.Rect.super.new(self, t)
+  _.rect.super.new(self, t)
   self.w = t.w or 0
   self.h = t.h or 0
   self.draws = t.draws or {}
@@ -93,7 +93,7 @@ function _.Rect:new(t)
   end
 
   self._draw = self.draws.inactive
-  self.col_type = "Rect"
+  self.col_type = "rect"
 end
 
 function _.Button:update(dt)

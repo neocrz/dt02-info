@@ -3,10 +3,10 @@ local State = {}
 local ObjHandler = ObjectHandler()
 
 function State:enter()
-  local btn = Gui.button.Rect{
+  local btn = Gui.button.rect{
     text="btn"
   }
-  local btn2 = Gui.button.Rect{
+  local btn2 = Gui.button.rect{
     text="btn2"
   }
 

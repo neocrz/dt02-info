@@ -12,7 +12,7 @@ local dflt = {
 
 _t = nil
 
-function _.Rect(r1, r2)
+function _.rect(r1, r2)
     local rect1 = {}
     local rect2 = {}
 
@@ -36,7 +36,7 @@ function _.Rect(r1, r2)
     end
 end
 
-function _.Circ(c1, c2)
+function _.circ(c1, c2)
     local circle1 = {}
     circle1.x = c1.x or 0
     circle1.y = c1.y or 0
