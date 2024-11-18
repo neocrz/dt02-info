@@ -1,29 +1,34 @@
--- menu_state.lua
+-- boxes.lua
 local State = {}
 local ObjHandler = ObjectHandler()
 
+
 function State:enter()
-  local _btn = {}
-  _btn.count = 2
-  _btn.h = CONF.H/10
-  _btn.pad = _btn.h/2
-  _btn.w = CONF.W/2
-  _btn.x = CONF.W/2 - _btn.w/2
-  _btn.y = CONF.H/2 - (_btn.h*_btn.count + _btn.pad * _btn.count-1)/2
-  _btn.text = "BOXES"
-  _btn.action = {released = function (self)  StateManager:switch("boxes")  end}
+  local box = {}
+  box.w = CONF.W-(40*2)
+  box.h = CONF.H/3
+  box.x = (CONF.W/2) - (box.w/2)
+  box.y = (CONF.H/2) - (box.h/2)
+  ObjHandler:addObj(Gui.base.Rect{x=box.x,y=box.y,w=box.w,h=box.h})
 
+  local lines = 6
+  local cols = 10
+  local btns = {}
+  btns.w = box.w/(cols*2-1)
+  btns.h = box.h/(cols*2-1)
+  btns.pad_h = (box.h-(btns.h*lines))/(lines-1)
 
-  local btn_boxes = Gui.button.rect(_btn)
-
-  _btn.y = _btn.y + _btn.h + _btn.pad
-  _btn.text = "QUIT"
-
-  _btn.action.released = function(self) love.event.quit() end
-  local btn_quit = Gui.button.rect(_btn)
-
-  ObjHandler:addObj(btn_boxes)
-  ObjHandler:addObj(btn_quit)
+  btns._x = box.x
+  btns._y = box.y
+  for i = 1, cols, 1 do
+    btns.x = btns._x + (btns.w*2) * (i-1)
+    for j = 1, lines, 1 do
+      btns.y = btns._y + (btns.h+btns.pad_h) *(j-1)
+      local b = Gui.button.rect{x=btns.x, y=btns.y, w=btns.w, h=btns.h}
+      ObjHandler:addObj(b)
+    end
+  end
+  -- ObjHandler:addObj(btn)
 end
 
 function State:update(dt)

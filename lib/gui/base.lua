@@ -35,8 +35,8 @@ function Base.Circ:new(_)
   self.r = t.r or 0
 end
 
-function Base.Circ:draw()
-  love.graphics.rectangle(self.mode, self.x, self.y, self.r)
+function Base.Rect:draw()
+  love.graphics.rectangle(self.mode, self.x, self.y, self.w, self.h)
 end
 
 Base.Text = Base.Rect:extend()
