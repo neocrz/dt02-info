@@ -6,9 +6,6 @@ local ObjHandler = ObjectHandler()
 function State:enter()
   -- selected digi
   local selected = {}
-
-
-
   -- Margins
   local box = {}
   box.w = CONF.W-(40*2)
@@ -38,6 +35,7 @@ function State:enter()
           selected.col = j
         end,},
       }
+      digi_cel.text = i..","..j
       ObjHandler:addObj(digi_cel)
     end
   end
@@ -45,13 +43,28 @@ function State:enter()
   local boxes = {}
   boxes._x = box.x
   boxes.pad = 10
-  boxes.y = box.y-btns.h-boxes.pad
-  boxes.qtd = 6
-  for i = 1, boxes.qtd, 1 do
-    boxes.x = boxes._x + btns.w * (i-1)
-    local b = Gui.button.rect{x=boxes.x, y=boxes.y, w=btns.w, h=btns.h}
-    ObjHandler:addObj(b)
+  boxes.y = box.y-(btns.h*2)-boxes.pad
+  boxes.cols = 6
+  boxes.lines = 2
+  local k = 0
+  for i = 1, boxes.lines, 1 do
+    boxes.y = boxes.y + btns.h*(i-1)
+    for j = 1, boxes.cols, 1 do
+      k = k + 1
+      boxes.x = boxes._x + btns.w * (j-1)
+      local b = Gui.button.rect{x=boxes.x, y=boxes.y, w=btns.w, h=btns.h}
+      b.text = k
+      ObjHandler:addObj(b)
+    end
   end
+
+  local txt = {}
+  txt.margins = {x=box.x, w=box.w}
+  txt.margins.h = 30
+  txt.margins.y = 80
+  txt.objs = {margins=Gui.base.Rect(txt.margins)}
+  ObjHandler:addObj(txt.objs.margins)
+
 end
 
 function State:update(dt)
