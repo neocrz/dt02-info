@@ -4,31 +4,54 @@ local ObjHandler = ObjectHandler()
 
 
 function State:enter()
+  -- selected digi
+  local selected = {}
+
+
+
+  -- Margins
   local box = {}
   box.w = CONF.W-(40*2)
-  box.h = CONF.H/3
+  box.h = box.w * (6/10)
   box.x = (CONF.W/2) - (box.w/2)
   box.y = (CONF.H/2) - (box.h/2)
   ObjHandler:addObj(Gui.base.Rect{x=box.x,y=box.y,w=box.w,h=box.h})
 
+  -- Digi cells
+
   local lines = 6
   local cols = 10
   local btns = {}
-  btns.w = box.w/(cols*2-1)
-  btns.h = box.h/(cols*2-1)
-  btns.pad_h = (box.h-(btns.h*lines))/(lines-1)
+  btns.w = box.w/(cols)
+  btns.h = box.h/(lines)
 
   btns._x = box.x
   btns._y = box.y
-  for i = 1, cols, 1 do
-    btns.x = btns._x + (btns.w*2) * (i-1)
-    for j = 1, lines, 1 do
-      btns.y = btns._y + (btns.h+btns.pad_h) *(j-1)
-      local b = Gui.button.rect{x=btns.x, y=btns.y, w=btns.w, h=btns.h}
-      ObjHandler:addObj(b)
+  for i = 1, lines, 1 do
+    btns.y = btns._y + btns.h * (i-1)
+    for j = 1, cols, 1 do
+      btns.x = btns._x + btns.w * (j-1)
+      local digi_cel = Gui.button.rect{
+        x=btns.x, y=btns.y, w=btns.w, h=btns.h,
+        action={released = function(self)
+          selected.line = i
+          selected.col = j
+        end,},
+      }
+      ObjHandler:addObj(digi_cel)
     end
   end
-  -- ObjHandler:addObj(btn)
+  -- boxes
+  local boxes = {}
+  boxes._x = box.x
+  boxes.pad = 10
+  boxes.y = box.y-btns.h-boxes.pad
+  boxes.qtd = 6
+  for i = 1, boxes.qtd, 1 do
+    boxes.x = boxes._x + btns.w * (i-1)
+    local b = Gui.button.rect{x=boxes.x, y=boxes.y, w=btns.w, h=btns.h}
+    ObjHandler:addObj(b)
+  end
 end
 
 function State:update(dt)
