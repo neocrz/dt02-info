@@ -53,7 +53,7 @@ function _:genBoxes()
       end
     end
   end
-  self.base_digi = copyt(self.boxes[1][1][1])
+  self.base_digi = Tcopy(self.boxes[1][1][1])
   self:save()
   return true
 end
@@ -144,7 +144,7 @@ function _:rmDigi(box, line, row)
     return false, msg
   end
 
-  self.boxes[box][line][row] = copyt(self.base_digi)
+  self.boxes[box][line][row] = Tcopy(self.base_digi)
   self:save()
   return true
 end
